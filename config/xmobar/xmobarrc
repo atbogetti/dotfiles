@@ -1,0 +1,40 @@
+Config { font = "xft:Noto Sans:size=12:style=medium:antialias=true:hinting=true,FontAwesome:size=12"
+       , additionalFonts = []
+       , bgColor = "#282a36"
+       , fgColor = "#f8f8f2"
+       , alpha = 255
+       , position = Top
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [ Run Weather "EGPF" ["-t","<station>: <tempC>C",
+                                          "-L","18","-H","25",
+                                          "--normal","green",
+                                          "--high","red",
+                                          "--low","lightblue"] 36000
+                    , Run Network "eth0" ["-L","0","-H","32",
+                                          "--normal","green","--high","red"] 10
+                    , Run Network "eth1" ["-L","0","-H","32",
+                                          "--normal","green","--high","red"] 10
+                    , Run Cpu ["-t", " <total>%", "-L","10","-H","50",
+                               "--normal","#ffb86c","--high","#ff5555"] 10
+                    , Run Memory ["-t"," <usedratio>%"] 10
+                    , Run Swap [] 10
+                    , Run Com "uname" ["-s","-r"] "" 36000
+                    , Run Date " %a %b %d, %H:%M" "date" 10
+                    , Run Battery ["-t", "<acstatus>: <left>%", "--", "-O", "AC", "-o", "Bat", "-h", "green", "-l", "red"] 10
+                    , Run UnsafeStdinReader
+                    , Run Com "/home/atb43/.config/xmobar/volume.sh" [] "myvolume" 1
+                    , Run Com "/home/atb43/.config/xmobar/music.sh" [] "nowplaying" 1
+                    , Run Com "/home/atb43/.config/xmobar/linux.sh" [] "linux" 1
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "  <fc=#ff5555>%linux%</fc> : %UnsafeStdinReader% }{ %nowplaying% | %myvolume% | %memory% | %cpu% | %date%  "
+       }

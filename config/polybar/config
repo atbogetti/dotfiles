@@ -1,0 +1,149 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[colors]
+;background = ${xrdb:color0:#222}
+background = #383C4A
+background-alt = #7C818C
+;foreground = ${xrdb:color7:#222}
+foreground = #ffffff
+foreground-alt = #e3e3e3
+primary = #5294e2
+secondary = #e60053
+alert = #bd2c40
+
+[bar/mybar]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 24
+;offset-x = 1%
+;offset-y = 1%
+radius = 0.0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 0
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = Noto Sans:size=11:style=Medium;2
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+
+modules-left = ewmh
+modules-center = 
+modules-right = memory cpu date
+
+tray-position = right
+tray-padding = 2
+;tray-background = #0063ff
+
+;wm-restack = bspwm
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = bspwm-desknext
+;scroll-down = bspwm-deskprev
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = "CPU: "
+format-prefix-foreground = ${colors.foreground}
+format-underline =
+label = %percentage:2%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = "MEM: "
+format-prefix-foreground = ${colors.foreground}
+format-underline =
+label = %percentage_used%%
+
+[module/ewmh]
+type=internal/xworkspaces
+pin-workspaces = true
+enable-click = true
+enable-scroll = false
+icon-0 = Home;1
+icon-1 = Work;2
+icon-2 = Music;3
+icon-3 = Reading;4
+icon-4 = Other;5
+
+label-active = %icon%
+label-active-padding = 2
+label-active-foreground = ${colors.foreground}
+label-active-background = ${colors.primary}
+label-occupied = %icon%
+label-occupied-padding = 2
+label-occupied-foreground = #7c818c
+label-occupied-background = ${colors.background}
+label-empty = %icon%
+label-empty-padding = 2
+label-empty-foreground = #7c818c
+label-empty-background = ${colors.background}
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = %a %b %d,
+
+time = %H:%M
+
+format-prefix = ""
+format-prefix-foreground = ${colors.foreground}
+format-underline =
+
+label = %date% %time%
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+;pseudo-transparency = false
+
+[global/wm]
+margin-top = 0
+margin-bottom = 0
+
+
+
+
+; vim:ft=dosini

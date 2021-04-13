@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+
+<menu id="settings-menu" label="Settings">
+  <item label="Openbox Settings">
+    <action name="Execute">
+      <command>obconf</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
+    </action>
+  </item>
+  <item label="Appearance">
+    <action name="Execute">
+	    <command>/usr/bin/lxappearance</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
+    </action>
+  </item>
+  <item label="Background">
+    <action name="Execute">
+	    <command>/usr/bin/nitrogen</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
+    </action>
+  </item>
+  <item label="Panel Settings">
+    <action name="Execute">
+      <command>tint2conf</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
+    </action>
+  </item>
+  <item label="Reconfigure Openbox">
+    <action name="Execute">
+      <command>openbox --reconfigure</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
+    </action> 
+  </item>
+  <item label="Restart Openbox">
+    <action name="Execute">
+      <command>openbox --restart</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
+    </action> 
+  </item>
+</menu>
+
+<menu id="power-menu" label="Power">
+  <item label="Log Out">
+    <action name="Exit">
+      <prompt>yes</prompt>
+    </action>
+  </item>
+  <item label="Restart">
+    <action name="Execute">
+	    <command>systemctl reboot</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
+      <prompt>yes</prompt>
+    </action>
+  </item>
+  <item label="Poweroff">
+    <action name="Execute">
+	    <command>systemctl poweroff</command>
+      <startupnotify><enabled>yes</enabled></startupnotify>
+      <prompt>yes</prompt>
+    </action>
+  </item>
+</menu>
+<menu id="desktop-menu" label="Desktops">
+  <item label="Home">
+	  <action name="GoToDesktop"><to>1</to></action>
+  </item>
+  <item label="Work">
+	  <action name="GoToDesktop"><to>2</to></action>
+  </item>
+  <item label="Music">
+	  <action name="GoToDesktop"><to>3</to></action>
+  </item>
+  <item label="Reading">
+	  <action name="GoToDesktop"><to>4</to></action>
+  </item>
+  <item label="Other">
+	  <action name="GoToDesktop"><to>5</to></action>
+  </item>
+</menu>
+
+<menu id="root-menu" label="Openbox 3">
+  <menu id="desktop-menu"/>
+  <item label="Firefox">
+    <action name="Execute">
+	    <command>/usr/bin/firefox</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="Files">
+    <action name="Execute">
+	    <command>/usr/bin/thunar</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="Terminal">
+    <action name="Execute">
+	    <command>/usr/bin/termite</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="Slack">
+    <action name="Execute">
+	    <command>/usr/bin/slack</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="Zoom">
+    <action name="Execute">
+	    <command>/usr/bin/zoom</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="Spotify">
+    <action name="Execute">
+	    <command>/usr/bin/spotify</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="Inkscape">
+    <action name="Execute">
+	    <command>/usr/bin/inkscape</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <item label="Search">
+    <action name="Execute">
+	    <command>dmenu_run</command>
+      <startupnotify>
+        <enabled>yes</enabled>
+      </startupnotify>
+    </action>
+  </item>
+  <menu id="settings-menu"/>
+  <menu id="power-menu"/>
+</menu>
+
+</openbox_menu>
