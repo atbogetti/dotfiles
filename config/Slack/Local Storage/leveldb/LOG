@@ -1,6 +1,0 @@
-2021/04/13-10:23:52.340 57d7 Reusing MANIFEST /home/atb43/.config/Slack/Local Storage/leveldb/MANIFEST-000001
-2021/04/13-10:23:52.340 57d7 Recovering log #8
-2021/04/13-10:23:52.342 57d7 Reusing old log /home/atb43/.config/Slack/Local Storage/leveldb/000008.log 
-2021/04/13-10:34:52.724 5c6a Level-0 table #12: started
-2021/04/13-10:34:52.726 5c6a Level-0 table #12: 20144 bytes OK
-2021/04/13-10:34:52.728 5c6a Delete type=0 #8
