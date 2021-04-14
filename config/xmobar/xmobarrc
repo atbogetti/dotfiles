@@ -10,7 +10,7 @@ Config { font = "xft:Noto Sans:size=12:style=medium:antialias=true:hinting=true,
        , pickBroadest = False
        , persistent = False
        , hideOnStart = False
-       , iconRoot = "."
+       , iconRoot = "/home/atb43/.xmonad/xpm/" -- default: "."
        , allDesktops = True
        , overrideRedirect = True
        , commands = [ Run Weather "EGPF" ["-t","<station>: <tempC>C",
@@ -22,7 +22,7 @@ Config { font = "xft:Noto Sans:size=12:style=medium:antialias=true:hinting=true,
                                           "--normal","green","--high","red"] 10
                     , Run Network "eth1" ["-L","0","-H","32",
                                           "--normal","green","--high","red"] 10
-                    , Run Cpu ["-t", " <total>%", "-L","10","-H","50",
+                    , Run Cpu ["-t", " <total>%", "-L","50","-H","75",
                                "--normal","#ffb86c","--high","#ff5555"] 10
                     , Run Memory ["-t"," <usedratio>%"] 10
                     , Run Swap [] 10
@@ -36,5 +36,5 @@ Config { font = "xft:Noto Sans:size=12:style=medium:antialias=true:hinting=true,
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "  <fc=#ff5555>%linux%</fc> : %UnsafeStdinReader% }{ %nowplaying% | %myvolume% | %memory% | %cpu% | %date%  "
+       , template = " <icon=debian.xpm/><fc=#ff5555>%linux%</fc> : %UnsafeStdinReader% }{ %nowplaying% | %myvolume% | %memory% | %cpu% | %date%  "
        }
