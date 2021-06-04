@@ -1,7 +1,7 @@
-Config { font = "xft:Noto Sans:size=12:style=medium:antialias=true:hinting=true,FontAwesome:size=12"
+Config { font = "xft:Noto Sans:size=11:style=medium:antialias=true:hinting=true"
        , additionalFonts = []
-       , bgColor = "#282a36"
-       , fgColor = "#f8f8f2"
+       , bgColor = "#232627"
+       , fgColor = "#fcfcfc"
        , alpha = 255
        , position = Top
        , textOffset = -1
@@ -22,19 +22,22 @@ Config { font = "xft:Noto Sans:size=12:style=medium:antialias=true:hinting=true,
                                           "--normal","green","--high","red"] 10
                     , Run Network "eth1" ["-L","0","-H","32",
                                           "--normal","green","--high","red"] 10
-                    , Run Cpu ["-t", " <total>%", "-L","50","-H","75",
+                    , Run Cpu ["-t", "<total>%", "-L","50","-H","75",
                                "--normal","#ffb86c","--high","#ff5555"] 10
-                    , Run Memory ["-t"," <usedratio>%"] 10
+                    , Run Memory ["-t","<usedratio>%"] 10
                     , Run Swap [] 10
                     , Run Com "uname" ["-s","-r"] "" 36000
-                    , Run Date " %a %b %d, %H:%M" "date" 10
+                    , Run Date "%a %b %d, %H:%M" "date" 10
                     , Run Battery ["-t", "<acstatus>: <left>%", "--", "-O", "AC", "-o", "Bat", "-h", "green", "-l", "red"] 10
                     , Run UnsafeStdinReader
-                    , Run Com "/home/atb43/.config/xmobar/volume.sh" [] "myvolume" 1
-                    , Run Com "/home/atb43/.config/xmobar/music.sh" [] "nowplaying" 1
-                    , Run Com "/home/atb43/.config/xmobar/linux.sh" [] "linux" 1
+                    , Run Com "/home/atb43/.config/xmobar/volume.sh" [] "myvolume" 10
+                    , Run Com "/home/atb43/.config/xmobar/music.sh" [] "nowplaying" 10
+                    , Run Com "/home/atb43/.config/xmobar/storage.sh" [] "storage" 50
+                    , Run Com "/home/atb43/.config/xmobar/temp.sh" [] "temp" 50
+                    , Run Com "/home/atb43/.config/xmobar/load.sh" [] "load" 50
+                    , Run Com "/home/atb43/.config/xmobar/memory.sh" [] "mem" 50
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <icon=debian.xpm/><fc=#ff5555>%linux%</fc> : %UnsafeStdinReader% }{ %nowplaying% | %myvolume% | %memory% | %cpu% | %date%  "
+       , template = " %UnsafeStdinReader% } %nowplaying% { %load% | %mem% | %temp% | %myvolume% | %date%  "
        }

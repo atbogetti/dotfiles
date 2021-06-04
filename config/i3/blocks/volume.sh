@@ -3,9 +3,7 @@
 volume=$(pamixer --get-volume)
 mute=$(pamixer --get-mute)
 if [ $mute = 'true' ]; then
-	#echo " 0%"
-	echo "mute"
+	echo " 0%"
 elif [ $mute = 'false' ]; then
-	$echo " $volume%"
-	echo "VOL: $volume%"
+	echo " $volume%"
 fi

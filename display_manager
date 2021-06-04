@@ -1,0 +1,33 @@
+#!/bin/bash
+
+echo -e "Welcome to ArchLinux."
+
+PS3="Enter session:"
+window_managers=("dwm" "qtile" "bspwm" "i3" "xmonad")
+select wm in "${window_managers[@]}"; do
+    case $wm in
+        "dwm")
+            WM="dwm"
+	    break
+	    ;;
+        "qtile")
+            WM="qtile"
+	    break
+	    ;;
+        "bspwm")
+            WM="bspwm"
+	    break
+	    ;;
+        "i3")
+            WM="i3"
+	    break
+	    ;;
+        "xmonad")
+            WM="xmonad"
+	    break
+	    ;;
+	*) echo "Invalid choice $REPLY";;
+    esac
+done
+
+desktop=$WM startx &> /dev/null

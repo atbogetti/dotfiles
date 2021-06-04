@@ -29,7 +29,7 @@ import qualified XMonad.StackSet as W
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "xfce4-terminal"
+myTerminal      = "st"
 myEditor = myTerminal ++ " -e vim "
 
 -- Whether focus follows the mouse pointer.
@@ -59,8 +59,8 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
---myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
-myWorkspaces    = ["home","web","ssh","chat","music","ink","vmd","dev","vbox"]
+myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
+--myWorkspaces    = ["home","web","ssh","chat","music","ink","vmd","dev","vbox"]
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..]
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
@@ -69,8 +69,8 @@ clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#44475a"
-myFocusedBorderColor = "#50fa7b"
+myNormalBorderColor  = "#232627"
+myFocusedBorderColor = "#1793d0"
 
 -- Tree Select Menu
 treeselectAction :: TS.TSConfig (X ()) -> X ()
@@ -78,18 +78,16 @@ treeselectAction a = TS.treeselectAction a
      [ Node (TS.TSNode "Favorites" "" (return ()))
        [ Node (TS.TSNode "Firefox" "" (spawn "firefox")) []
        , Node (TS.TSNode "Files" "" (spawn "thunar")) []
-       , Node (TS.TSNode "Terminal" "" (spawn "xfce4-terminal")) []
+       , Node (TS.TSNode "Terminal" "" (spawn "st")) []
        , Node (TS.TSNode "Slack" "" (spawn "slack")) []
        , Node (TS.TSNode "Zoom" "" (spawn "zoom")) []
        , Node (TS.TSNode "Spotify" "" (spawn "spotify")) []
        , Node (TS.TSNode "Inkscape" "" (spawn "inkscape")) []
        , Node (TS.TSNode "VMD" "" (spawn "vmd")) []
-       , Node (TS.TSNode "VirtualBox" "" (spawn "virtualbox")) []
        ]
       ,Node (TS.TSNode "Settings" "" (return ()))
        [ Node (TS.TSNode "Background" "" (spawn "nitrogen")) []
        , Node (TS.TSNode "Appearance" "" (spawn "lxappearance")) []
-       , Node (TS.TSNode "LightDM" "" (spawn "lightdm-gtk-greeter-settings")) []
        ]
       ,Node (TS.TSNode "Power" "" (return ()))
        [ Node (TS.TSNode "Logout" "" (io (exitWith ExitSuccess))) []
@@ -100,17 +98,17 @@ treeselectAction a = TS.treeselectAction a
 
 tsDefaultConfig :: TS.TSConfig a
 tsDefaultConfig = TS.TSConfig { TS.ts_hidechildren = True
-                              , TS.ts_background   = 0xdd282c34
-                              , TS.ts_font         = "xft:Noto Sans Medium-12"
-                              , TS.ts_node         = (0xffd0d0d0, 0xff202331)
-                              , TS.ts_nodealt      = (0xffd0d0d0, 0xff292d3e)
-                              , TS.ts_highlight    = (0xffffffff, 0xff755999)
+                              , TS.ts_background   = 0xdd232627
+                              , TS.ts_font         = "xft:DejaVu Sans-11"
+                              , TS.ts_node         = (0xffd0d0d0, 0xff232627)
+                              , TS.ts_nodealt      = (0xffd0d0d0, 0xff232627)
+                              , TS.ts_highlight    = (0xffffffff, 0xff1793d0)
                               , TS.ts_extra        = 0xffd0d0d0
-                              , TS.ts_node_width   = 200
+                              , TS.ts_node_width   = 125
                               , TS.ts_node_height  = 26
                               , TS.ts_originX      = 0
                               , TS.ts_originY      = 0
-                              , TS.ts_indent       = 80
+                              , TS.ts_indent       = 40
                               , TS.ts_navigate     = myTreeNavigation
                               }
 
@@ -118,9 +116,13 @@ myTreeNavigation = M.fromList
     [ ((0, xK_Escape),   TS.cancel)
     , ((0, xK_Return),   TS.select)
     , ((0, xK_Up),       TS.movePrev)
+    , ((0, xK_k),        TS.movePrev)
     , ((0, xK_Down),     TS.moveNext)
+    , ((0, xK_j),        TS.moveNext)
     , ((0, xK_Left),     TS.moveParent)
+    , ((0, xK_h),        TS.moveParent)
     , ((0, xK_Right),    TS.moveChild)
+    , ((0, xK_l),        TS.moveChild)
     ]
 
 ------------------------------------------------------------------------
@@ -132,13 +134,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run -fn 'Noto Sans Medium-12' -nb '#282a36' -nf '#f8f8f2' -sb '#bd93f9' -sf '#f8f8f2'")
+    , ((modm,               xK_p     ), spawn "dmenu_run -fn 'DejaVu Sans-11' -nb '#232627' -nf '#fcfcfc' -sb '#1793d0' -sf '#fcfcfc'")
     
     -- treeselect menu
     , ((modm,               xK_d     ),treeselectAction tsDefaultConfig)
-
-    -- launch gmrun
-    , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -207,9 +206,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((0, xF86XK_AudioPlay), spawn "playerctl play-pause")
     , ((0, xF86XK_AudioPrev), spawn "playerctl previous")
     , ((0, xF86XK_AudioNext), spawn "playerctl next")
-    , ((0, xF86XK_AudioMute),   spawn "amixer set Master toggle")
-    , ((0, xF86XK_AudioLowerVolume), spawn "amixer set Master 5%- unmute")
-    , ((0, xF86XK_AudioRaiseVolume), spawn "amixer set Master 5%+ unmute")
+    , ((0, xF86XK_AudioMute),   spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    , ((0, xF86XK_AudioLowerVolume), spawn "pamixer -d 5")
+    , ((0, xF86XK_AudioRaiseVolume), spawn "pamixer -i 5")
     ]
     ++
 
@@ -325,12 +324,12 @@ windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace
 myLogHook :: Handle -> X ()
 myLogHook xmproc = dynamicLogWithPP $ xmobarPP
      { ppOutput = hPutStrLn xmproc,
-       ppTitle = xmobarColor "#50fa7b" "" . shorten 50,
+       ppTitle = xmobarColor "#73d216" "" . shorten 40,
        ppWsSep = "  ",
-       ppCurrent = xmobarColor "#f8f8f2" "" . wrap "[" "]" . clickable,
-       ppVisible = xmobarColor "#f8f8f2" "" . clickable,
-       ppHiddenNoWindows = xmobarColor "#93a1a1" "" . clickable,
-       ppHidden = xmobarColor "#93a1a1" "" . wrap "*" "" . clickable
+       ppCurrent = xmobarColor "#fcfcfc" "" . wrap "[" "]" . clickable,
+       ppVisible = xmobarColor "#fcfcfc" "" . clickable,
+       ppHiddenNoWindows = xmobarColor "#676e7d" "" . clickable,
+       ppHidden = xmobarColor "#676e7d" "" . wrap "*" "" . clickable
      }
 
 ------------------------------------------------------------------------
@@ -343,12 +342,11 @@ myLogHook xmproc = dynamicLogWithPP $ xmobarPP
 -- By default, do nothing.
 myStartupHook = do
         spawnOnce "nitrogen --restore &"
-        spawnOnce "dunst &"
-        spawnOnce "xfce4-power-manager &"
+        spawnOnce "dunst -config /home/atb43/.config/dunst/dunstrc_xmonad &"
         spawnOnce "dropbox start &"
         spawnOnce "xsetroot -cursor_name left_ptr &"
-        spawnOnce "compton --config /home/atb43/.config/compton/compton.conf &"
-
+        spawnOnce "picom --config /home/atb43/.config/picom/picom.conf &"
+        spawnOnce "xset s off -dpms"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

@@ -5,6 +5,5 @@ title=$(playerctl -s metadata title)
 if [ -z "$artist" ]; then
 	:
 else 
-	#echo "  $title - $artist"
-	echo "$title - $artist"
+	printf " $title - $artist  | "
 fi
